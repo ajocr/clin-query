@@ -1,5 +1,5 @@
 {
-      "name": "Clinical Research Patient Search",
+      "name": "ClinQuery",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -51,6 +51,7 @@
             "@types/react": "^19.2.7",
             "@types/react-dom": "^19.2.3",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "file-loader": "^6.2.0",
             "typescript": "^5.9.3",
             "vite": "6.3.5"
       },

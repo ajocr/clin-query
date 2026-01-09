@@ -80,7 +80,7 @@ const LAB_TEST_OPTIONS = [
 
 const mockPatients: Patient[] = [
   {
-    id: 'PT-001234',
+    id: '001234',
     name: 'Sarah Johnson',
     age: 42,
     gender: 'Female',
@@ -109,7 +109,7 @@ const mockPatients: Patient[] = [
     eligibilityScore: 95
   },
   {
-    id: 'PT-001235',
+    id: '001235',
     name: 'Michael Chen',
     age: 58,
     gender: 'Male',
@@ -137,7 +137,7 @@ const mockPatients: Patient[] = [
     eligibilityScore: 92
   },
   {
-    id: 'PT-001236',
+    id: '001236',
     name: 'Emily Rodriguez',
     age: 35,
     gender: 'Female',
@@ -167,7 +167,7 @@ const mockPatients: Patient[] = [
     eligibilityScore: 78
   },
   {
-    id: 'PT-001237',
+    id: '001237',
     name: 'James Wilson',
     age: 67,
     gender: 'Male',
@@ -195,7 +195,7 @@ const mockPatients: Patient[] = [
     eligibilityScore: 65
   },
   {
-    id: 'PT-001238',
+    id: '001238',
     name: 'Maria Garcia',
     age: 51,
     gender: 'Female',
@@ -223,7 +223,7 @@ const mockPatients: Patient[] = [
     eligibilityScore: 88
   },
   {
-    id: 'PT-001239',
+    id: '001239',
     name: 'David Thompson',
     age: 44,
     gender: 'Male',
@@ -389,9 +389,9 @@ export function PatientSearch() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-gray-900">Patient Recruitment Search</h1>
+          <h1 className="text-gray-900">Patient Search</h1>
           <p className="text-gray-600 mt-1">
-            Find eligible patients for clinical trial enrollment based on medical criteria
+            Find patients based on medical criteria
           </p>
         </div>
         <Button variant="outline" className="gap-2">
@@ -409,7 +409,7 @@ export function PatientSearch() {
             </div>
             <div className="flex-1">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-blue-900">Example: How to Use Lab Criteria Builder</h3>
+                <h3 className="text-blue-900">How to Use ClinQuery</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -497,12 +497,7 @@ export function PatientSearch() {
                   <p className="text-sm text-blue-900">
                     💡 <span className="font-medium">How it works:</span> Click "Add Criterion" → A searchable dropdown appears → Search or browse by category → Select your lab test → Configure the operator and values → Click the X button to remove
                   </p>
-                </div>
-                <div className="p-3 bg-white rounded border border-blue-200">
-                  <p className="text-sm text-blue-900">
-                    📋 <span className="font-medium">Available Categories:</span> Metabolic, Lipid Panel, Vitals, Renal Function, Liver Function, Hematology, Thyroid, and more
-                  </p>
-                </div>
+                </div>      
               </div>
             </div>
           </div>
@@ -518,7 +513,7 @@ export function PatientSearch() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <Input
-                  placeholder="Search by patient name or ID..."
+                  placeholder="Search by patient name..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -636,7 +631,7 @@ export function PatientSearch() {
                   <div key={criterion.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                     <div className="flex-1 grid grid-cols-4 gap-3">
                       <div>
-                        <label className="text-xs text-gray-600 mb-1 block">Field</label>
+                        <label className="text-xs text-gray-600 mb-1 block">Test</label>
                         <div className="text-sm">{getFieldLabel(criterion.field)}</div>
                       </div>
                       <div>
@@ -740,7 +735,7 @@ export function PatientSearch() {
                 </TableRow>
               ) : (
                 filteredPatients.map((patient) => (
-                  <TableRow key={patient.id} className="hover:bg-gray-50 cursor-pointer">
+                  <TableRow key={patient.eligibilityScore} className="hover:bg-gray-50 cursor-pointer">
                     <TableCell>
                       <Badge variant="outline" className={getEligibilityColor(patient.eligibilityScore)}>
                         {patient.eligibilityScore}%
