@@ -1,5 +1,5 @@
 
-  ## Running the code
+  ## Running the app
 
   Run `npm i` to install the dependencies.
 
