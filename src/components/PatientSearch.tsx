@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Search, Download, UserCircle2, Plus, X, Lightbulb } from 'lucide-react';
+import { Search, Download, UserCircle2, Plus, X, Lightbulb, LogOut } from 'lucide-react';
+import { signOut } from 'aws-amplify/auth';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -77,6 +78,10 @@ const LAB_TEST_OPTIONS = [
   { value: 'tsh', label: 'TSH (mIU/L)', category: 'Thyroid' },
   { value: 'vitaminD', label: 'Vitamin D (ng/mL)', category: 'Other' },
 ];
+
+interface PatientSearchProps {
+  onLogout: () => void;
+}
 
 const mockPatients: Patient[] = [
   {
@@ -252,7 +257,7 @@ const mockPatients: Patient[] = [
   },
 ];
 
-export function PatientSearch() {
+export function PatientSearch({ onLogout }: PatientSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [ageMin, setAgeMin] = useState('');
   const [ageMax, setAgeMax] = useState('');
@@ -365,6 +370,15 @@ export function PatientSearch() {
     setFilteredPatients(results);
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      onLogout();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   const getEligibilityColor = (score: number) => {
     if (score >= 85) {
       return 'bg-green-100 text-green-800 border-green-200';
@@ -394,10 +408,16 @@ export function PatientSearch() {
             Find patients based on medical criteria
           </p>
         </div>
-        <Button variant="outline" className="gap-2">
-          <Download className="w-4 h-4" />
-          Export Results
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" className="gap-2">
+            <Download className="w-4 h-4" />
+            Export Results
+          </Button>
+          <Button variant="outline" className="gap-2" onClick={handleLogout}>
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
+        </div>
       </div>
 
       {/* Example Panel */}
